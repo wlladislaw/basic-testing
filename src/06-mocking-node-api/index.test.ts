@@ -1,5 +1,4 @@
-// Uncomment the code below and write your tests
-// import { readFileAsynchronously, doStuffByTimeout, doStuffByInterval } from '.';
+import { doStuffByTimeout, doStuffByInterval } from '.';
 
 describe('doStuffByTimeout', () => {
   beforeAll(() => {
@@ -11,11 +10,24 @@ describe('doStuffByTimeout', () => {
   });
 
   test('should set timeout with provided callback and timeout', () => {
-    // Write your test here
+    const cb = jest.fn();
+    const timer = 600;
+
+    const setTimeoutMock = jest.spyOn(global, 'setTimeout');
+    doStuffByTimeout(cb, timer);
+
+    expect(setTimeoutMock).toHaveBeenCalledWith(cb, timer);
   });
 
   test('should call callback only after timeout', () => {
-    // Write your test here
+    const cb = jest.fn();
+    const timer = 600;
+
+    doStuffByTimeout(cb, timer);
+    expect(cb).not.toHaveBeenCalled();
+    jest.advanceTimersByTime(timer);
+
+    expect(cb).toHaveBeenCalled();
   });
 });
 
@@ -29,17 +41,29 @@ describe('doStuffByInterval', () => {
   });
 
   test('should set interval with provided callback and timeout', () => {
-    // Write your test here
+    const cb = jest.fn();
+    const timer = 600;
+
+    const setIntervalMock = jest.spyOn(global, 'setInterval');
+    doStuffByInterval(cb, timer);
+
+    expect(setIntervalMock).toHaveBeenCalledWith(cb, timer);
   });
 
   test('should call callback multiple times after multiple intervals', () => {
-    // Write your test here
+    const cb = jest.fn();
+
+    doStuffByInterval(cb, 600);
+    doStuffByInterval(cb, 600);
+    jest.advanceTimersByTime(600);
+
+    expect(cb).toHaveBeenCalledTimes(2);
   });
 });
 
 describe('readFileAsynchronously', () => {
   test('should call join with pathToFile', async () => {
-    // Write your test here
+    // await readFileAsynchronously('');
   });
 
   test('should return null if file does not exist', async () => {
