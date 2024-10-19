@@ -7,6 +7,8 @@ describe('doStuffByTimeout', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    jest.clearAllMocks();
+    jest.clearAllTimers();
   });
 
   test('should set timeout with provided callback and timeout', () => {
@@ -38,6 +40,8 @@ describe('doStuffByInterval', () => {
 
   afterAll(() => {
     jest.useRealTimers();
+    jest.clearAllMocks();
+    jest.clearAllTimers();
   });
 
   test('should set interval with provided callback and timeout', () => {
